@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Multilingual Virtual Assistant Mindfulness App</title>
+
+<style>
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: #f5f7fa;
+    color: #333;
+}
+
+header {
+    background: #1f3c88;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #1f3c88;
+}
+
+/* Card style matching existing .card */
+.card {
+    background: white;
+    padding: 36px 32px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border-left: 6px solid #2ecc71;
+}
+
+/* Form layout */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f3c88;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 17px;
+    border: 2px solid #d0d7e8;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background: #f9fafc;
+    color: #333;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #1f3c88;
+    box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.12);
+    background: #fff;
+}
+
+/* Row for side-by-side fields */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Submit button */
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: #1f3c88;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover {
+    background: #162d6b;
+}
+
+.btn-submit:active {
+    transform: scale(0.99);
+}
+
+/* Divider */
+.divider {
+    text-align: center;
+    margin: 20px 0 16px;
+    color: #888;
+    font-size: 14px;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 42%;
+    height: 1px;
+    background: #dde3ef;
+}
+
+.divider::before { left: 0; }
+.divider::after  { right: 0; }
+
+/* Already have account link */
+.login-link {
+    text-align: center;
+    font-size: 15px;
+    color: #555;
+}
+
+.login-link a {
+    color: #1f3c88;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Success message */
+.success-banner {
+    display: none;
+    background: #eafaf1;
+    border-left: 6px solid #2ecc71;
+    padding: 16px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #1a7a42;
+    margin-bottom: 24px;
+}
+
+/* Helper text */
+.helper {
+    font-size: 13px;
+    color: #888;
+    margin-top: 5px;
+}
+
+footer {
+    background: #1f3c88;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+}
+
+/* Responsive: stack side-by-side fields on small screens */
+@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    .card {
+        padding: 28px 20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Multilingual Virtual Assistant Mindfulness App</h1>
+    <p>Create Your Account to Get Started</p>
+</header>
+
+<main class="container">
+
+    <section>
+        <h2>Register / Log In</h2>
+
+        <div class="card">
+
+            <div class="success-banner" id="successBanner">
+                ✅ Account created successfully! Welcome to your mindfulness journey.
+            </div>
+
+            <form id="loginForm" onsubmit="handleSubmit(event)" novalidate>
+
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    />
+                </div>
+
+                <!-- Date of Birth + Age side by side -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input
+                            type="date"
+                            id="dob"
+                            name="dob"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input
+                            type="number"
+                            id="age"
+                            name="age"
+                            placeholder="e.g. 68"
+                            min="1"
+                            max="120"
+                            required
+                        />
+                        <p class="helper">Auto-filled from date of birth</p>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    />
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    />
+                    <p class="helper">At least 8 characters recommended</p>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        required
+                    />
+                </div>
+
+                <button type="submit" class="btn-submit">Create Account</button>
+
+            </form>
+
+            <div class="divider">or</div>
+
+            <p class="login-link">
+                Already have an account? <a href="#">Sign in here</a>
+            </p>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>University Team Project — Multilingual Virtual Assistant Mindfulness App</p>
+</footer>
+
+<script>
+    // Auto-calculate age from date of birth
+    document.getElementById('dob').addEventListener('change', function () {
+        const dob = new Date(this.value);
+        if (isNaN(dob)) return;
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+        document.getElementById('age').value = age >= 0 ? age : '';
+    });
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const name     = document.getElementById('fullName').value.trim();
+        const dob      = document.getElementById('dob').value;
+        const age      = document.getElementById('age').value;
+        const email    = document.getElementById('email').value.trim();
+        const pw       = document.getElementById('password').value;
+        const cpw      = document.getElementById('confirmPassword').value;
+
+        if (!name || !dob || !age || !email || !pw || !cpw) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        if (pw !== cpw) {
+            alert('Passwords do not match. Please try again.');
+            return;
+        }
+
+        if (pw.length < 8) {
+            alert('Password should be at least 8 characters long.');
+            return;
+        }
+
+        // Show success banner
+        const banner = document.getElementById('successBanner');
+        banner.style.display = 'block';
+        document.getElementById('loginForm').reset();
+        banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+</script>
+
+</body>
+</html>
