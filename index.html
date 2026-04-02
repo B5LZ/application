@@ -1,311 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Mindfulness Assistant</title>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
-            background: #f5f7fa;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Multilingual Virtual Assistant Mindfulness App</title>
 
-        header {
-            background: #1f3c88;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: #f5f7fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-        /* Language Switcher in Header */
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+header {
+    background: #1f3c88;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
 
-        .lang-switcher-container {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
 
-        .lang-icon {
-            font-size: 18px;
-            margin-right: 8px;
-        }
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 0;
+    flex: 1;
+}
 
-        .header-lang-select {
-            background: transparent;
-            color: white;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            outline: none;
-        }
+/* Hero Section */
+.hero-card {
+    background: white;
+    padding: 50px 40px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border-top: 6px solid #2ecc71;
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .header-lang-select option {
-            color: #333;
-        }
+.hero-card h2 {
+    color: #1f3c88;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 22px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+.btn-primary {
+    display: inline-block;
+    text-decoration: none;
+    max-width: 300px;
+    width: 100%;
+    padding: 18px;
+    background: #1f3c88;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background 0.2s, transform 0.1s;
+}
 
-        .btn {
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
-            cursor: pointer;
-            border: none;
-        }
+.btn-primary:hover {
+    background: #162d6b;
+}
 
-        .login-btn {
-            background: white;
-            color: #1f3c88;
-        }
+.secondary-action {
+    margin-top: 20px;
+    font-size: 16px;
+}
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-            padding: 40px 0;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
+.secondary-action a {
+    color: #1f3c88;
+    font-weight: bold;
+    text-decoration: none;
+}
 
-        .ai-chat-placeholder {
-            background: #ffffff;
-            border: 2px dashed #1f3c88;
-            border-radius: 12px;
-            height: 550px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            width: 100%;
-        }
+/* Project Overview Section */
+.overview-section {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
 
-        .chat-header {
-            background: #e8edf7;
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-            color: #1f3c88;
-            border-bottom: 1px solid #d1d9e6;
-        }
+.overview-section h3 {
+    color: #1f3c88;
+    border-bottom: 2px solid #f5f7fa;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
 
-        .chat-body-empty {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-style: italic;
-        }
+/* Team Section */
+.team-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .description-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
+.team-section h3 {
+    color: #1f3c88;
+    margin-bottom: 25px;
+}
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            border-top: 4px solid #1f3c88;
-        }
+.team-list {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    flex-wrap: wrap; /* Allows wrapping on small screens */
+}
 
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
+.team-list li {
+    font-weight: bold;
+    color: #555;
+    padding: 10px;
+    flex: 1;
+    min-width: 120px; /* Ensures names don't get too squished */
+}
 
-        .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            max-width: 400px;
-        }
+footer {
+    background: #1f3c88;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+}
 
-        .modal-content select {
-            width: 100%;
-            padding: 12px;
-            margin: 20px 0;
-            font-size: 16px;
-        }
-
-        footer {
-            background: #1f3c88;
-            color: white;
-            padding: 20px;
-        }
-
-        .footer-content {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .hidden { display: none !important; }
-        .no-scroll { overflow: hidden; }
-
-        @media (max-width: 768px) {
-            header h1 { position: static; transform: none; font-size: 18px; }
-            .description-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .team-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+</style>
 </head>
-<body class="no-scroll">
 
-    <div id="languageModal" class="modal-overlay">
-        <div class="modal-content">
-            <h2>Language / 언어</h2>
-            <select id="initialLanguageSelect">
-                <option value="en">English</option>
-                <option value="ko">한국어 (Korean)</option>
-            </select>
-            <button class="btn login-btn" style="background:#1f3c88; color:white; width:100%" onclick="applyLanguage('initial')">Start</button>
+<body>
+
+<header>
+    <h1>Mindfulness Assistant</h1>
+</header>
+
+<main class="container">
+    <section class="hero-card">
+        <h2>Start Your Mindfulness Journey</h2>
+        <a href="signup.html" class="btn-primary">Sign Up</a>
+        <div class="secondary-action">
+            Already have an account? <a href="signin.html">Log In</a>
         </div>
-    </div>
+    </section>
 
-    <header>
-        <div class="header-left">
-            <div class="lang-switcher-container">
-                <span class="lang-icon">🌐</span>
-                <select id="headerLanguageSelect" class="header-lang-select" onchange="applyLanguage('header')">
-                    <option value="en">English</option>
-                    <option value="ko">한국어</option>
-                </select>
-            </div>
-        </div>
-        
-        <h1 data-key="headerTitle">Mindfulness Assistant</h1>
-        
-        <div class="header-right">
-            <a href="login.html" class="btn login-btn" data-key="loginBtn">Login</a>
-        </div>
-    </header>
+    <section class="overview-section">
+        <h3>Project Overview</h3>
+        <p>
+            The <strong>Multilingual Virtual Assistant Mindfulness App</strong> is a digital wellness tool designed to help older adults participate in guided mindfulness sessions. The application uses a conversational virtual assistant that walks users through short mindfulness exercises through a simple and accessible interface.
+        </p>
+        <p>
+            The system focuses on usability for older adults by emphasizing clear navigation, large readable text, and minimal interaction steps. The first version supports Korean while the architecture allows additional languages to be added later.
+        </p>
+        <p>
+            This project demonstrates how AI-guided digital assistants can support mental wellness programs while maintaining accessibility for aging populations.
+        </p>
+    </section>
 
-    <main class="container">
-        <aside class="ai-chat-placeholder">
-            <div class="chat-header" data-key="chatHeader">Mindfulness Virtual Assistant</div>
-            <div class="chat-body-empty" data-key="chatBody">[ AI Chatbot Code Injection Point ]</div>
-        </aside>
+    <section class="team-section">
+        <h3>Project Team</h3>
+        <ul class="team-list">
+            <li>Wonyong C.</li>
+            <li>David L.</li>
+            <li>Paul M.</li>
+            <li>Priya S.</li>
+            <li>Alexa V.</li>
+            <li>Mohammad S.</li>
+        </ul>
+    </section>
+</main>
 
-        <div class="description-grid">
-            <section class="card">
-                <h2 data-key="card1Title">About the Assistant</h2>
-                <p data-key="card1Text">Our AI is trained to guide you through mindfulness exercises.</p>
-            </section>
-            <section class="card">
-                <h3 data-key="card2Title">Usage Instructions</h3>
-                <p data-key="card2Text">Find a quiet space and follow the breathing prompts.</p>
-            </section>
-            <section class="card">
-                <h3 data-key="card3Title">Recent Updates</h3>
-                <p data-key="card3Text">We improved the Korean processing features recently.</p>
-            </section>
-            <section class="card">
-                <h3 data-key="card4Title">Quick Settings</h3>
-                <p data-key="card4Text">Customize your interface and accessibility options here.</p>
-            </section>
-        </div>
-    </main>
+<footer>
+    <p>University Team Project — Multilingual Virtual Assistant Mindfulness App</p>
+</footer>
 
-    <footer>
-        <div class="footer-content">
-            <p>© 2026 Multilingual Virtual Assistant Team</p>
-            <a href="support.html" class="btn" style="background:#2ecc71; color:white" data-key="supportBtn">Support Ticket</a>
-        </div>
-    </footer>
-
-    <script>
-        const translations = {
-            en: {
-                headerTitle: "Mindfulness Assistant",
-                loginBtn: "Login",
-                chatHeader: "Mindfulness Virtual Assistant",
-                chatBody: "[ AI Chatbot Code Injection Point ]",
-                card1Title: "About the Assistant",
-                card1Text: "Our AI is trained to guide you through mindfulness exercises.",
-                card2Title: "Usage Instructions",
-                card2Text: "Find a quiet space and follow the breathing prompts.",
-                card3Title: "Recent Updates",
-                card3Text: "We improved the Korean processing features recently.",
-                card4Title: "Quick Settings",
-                card4Text: "Customize your interface and accessibility options here.",
-                supportBtn: "Support Ticket"
-            },
-            ko: {
-                headerTitle: "명상 보조 도구",
-                loginBtn: "로그인",
-                chatHeader: "명상 가상 비서",
-                chatBody: "[ AI 챗봇 코드 삽입 지점 ]",
-                card1Title: "비서 정보",
-                card1Text: "저희 AI는 명상 연습을 안내하도록 교육되었습니다.",
-                card2Title: "사용 지침",
-                card2Text: "조용한 장소를 찾고 호흡 안내를 따르십시오.",
-                card3Title: "최신 업데이트",
-                card3Text: "최근 한국어 처리 기능을 개선했습니다.",
-                card4Title: "빠른 설정",
-                card4Text: "여기에서 인터페이스와 접근성 설정을 사용자 정의하십시오.",
-                supportBtn: "지원 티켓"
-            }
-        };
-
-        function applyLanguage(source) {
-            const selectId = (source === 'initial') ? 'initialLanguageSelect' : 'headerLanguageSelect';
-            const selectedLang = document.getElementById(selectId).value;
-            
-            // Sync the other dropdown
-            const otherId = (source === 'initial') ? 'headerLanguageSelect' : 'initialLanguageSelect';
-            document.getElementById(otherId).value = selectedLang;
-
-            const data = translations[selectedLang];
-            document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (data[key]) el.innerText = data[key];
-            });
-
-            if (source === 'initial') {
-                document.getElementById('languageModal').classList.add('hidden');
-                document.body.classList.remove('no-scroll');
-            }
-        }
-    </script>
 </body>
 </html>
